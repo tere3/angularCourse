@@ -32,18 +32,41 @@
 			<h1>{{product.name}}</h1>
 			<img class="center-block" ng-src="{{product.images[0].url}}" alt="">
 			<em class="pull-right"><h4>{{product.price | currency}}</h4></em>
-			<p>{{product.description}}</p>
+			<!--<p>{{product.description}}</p>-->
 			<!--<button class="btn btn-danger">Add tu Cart</button>-->
-			<section>
-				<ul class="nav nav-pills">
-					<li><a href="" ng-click="tab = 1">Description</a></li>
-					<li><a href="" ng-click="tab = 2">Specifications</a></li>
-					<li><a href="" ng-click="tab = 3">Reviews</a></li>
+			<section ng-init="tab = 1" ng-controller="PanelController as panel">
+			<ul class="nav nav-pills" >
+				<li ng-class="{active: panel.isSelected(1)}">
+				<a href="" ng-click="panel.selectTab(1)">Description</a>
+				</li>
+					
+				<li ng-class="{active: panel.isSelected(2)}">
+				<a href="" ng-click="panel.selectTab(2)">Specifications</a>
+				</li>
+
+				<li ng-class="{active: panel.isSelected(3)}">
+				<a href="" ng-click="panel.selectTab(3)">Reviews</a>
+				</li>
 				</ul>
-				{{tab}}
+
+				<div class="panel" ng-show="panel.isSelected(1)">
+					<h4>Description</h4>
+					<p>{{product.description}}</p>
+				</div>
+
+				<div class="panel" ng-show="panel.isSelected(2)">
+					<h4>Specifications</h4>
+					<p>None yet</p>
+				</div>
+				
+				<div class="panel" ng-show="panel.isSelected(3)">
+					<h4>Reviews</h4>
+					<p>None yet</p>
+				</div>
+
 			</section>
-		</div>
-		</div>
+				</div>
+				</div>
 
 		<!--DIRECTIVAS
 		directiva para hacer que se vea o no el boton 
@@ -60,6 +83,14 @@
 		ng-src muestra imagenes, agrega el url a mi elemento imagen
 
 		ng-click 
+
+		=== indica que es el mismo tipo de dato (es para hacer comparacion)
+		= es para asignar
+		== compara pero pueden ser de diferente tipo
+
+		ng-init es para cuando abras la pagina ya este una tab seleccionada
+
+		ng-class agregamos clase de css, nos dice que tab es la que esta seleccionada
 
 		<h3>
 		{{store.product.name}}	
