@@ -31,7 +31,7 @@
 		{id:2, url: 'img/gem-06.gif'}
 		],
 		description: 'Lorem ipsum dolor sit amet, consectetur adipisicing elit. Possimus porro omnis aliquid, atque magnam non voluptates facilis officiis nam delectus beatae quod, illum ullam, unde quae. Quae et, vero corrupti!',
-		reviews:[
+		reviews:[ 
 		{stars: 4, body: 'I love this product', author:'teremendezr@hotmail.com'},
 		{stars: 2, body:'This product sucks', author: 'teremendezr@hotmail.com'}
 			]
@@ -65,6 +65,15 @@
 
 		this.isSelected = function(checkTab){
 			return this.tab === checkTab;
+		}
+	});
+	//controlador que maneja la parte del formulario del review
+	app.controller('ReviewsController', function(){
+		this.review={};
+
+		this.addReview = function(product){
+			product.reviews.push(this.review); //esto se llena con la funcion de mi controlador
+			this.review ={};
 		}
 	});
 })();
