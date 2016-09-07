@@ -4,6 +4,7 @@
 	<meta charset="utf-8">
 	<title>Document</title>
 	<link rel="stylesheet" href="css/bootstrap.min.css">
+	<link rel="stylesheet" href="css/style.css">
 </head>
 <body>
 	<!--<h1>Esta es mi primera pagina web con Angular JS</h1>
@@ -67,7 +68,7 @@
 						<br>
 						<cite>by: {{review.author}}</cite>
 					</blockquote>
-					<form name="reviewForm" ng-controller="ReviewsController as reviewCtrl" ng-submit="reviewCtrl.addReview(product)"> <!--Formulario para que el usuario pueda calificar el producto y darle las estrellas que el considera-->
+					<form name="reviewForm" ng-controller="ReviewsController as reviewCtrl" ng-submit="reviewForm.$valid && reviewCtrl.addReview(product)" novalidate> <!--Formulario para que el usuario pueda calificar el producto y darle las estrellas que el considera-->
 					<div class="row">
 					<blockquote> <!-- visualisamos los ng-model de cada input -->
 						<b>Stars: {{reviewCtrl.review.stars}}</b>
@@ -76,7 +77,7 @@
 					</blockquote>
 					<div class="col-lg-6 form-group">
 						<label for="rate">Rate this product:</label>
-						<select id="rate" class="form-control" ng-model="reviewCtrl.review.stars">
+						<select id="rate" class="form-control" ng-model="reviewCtrl.review.stars" required>
 						<option value="rate" selected="selected">Rate this product</option>
 						<option value="1">1 Star</option>
 						<option value="2">2 Stars</option>
@@ -86,14 +87,16 @@
 					</select>
 						</div>
 						<div class="col-lg-6 form-group">
-						<textarea id="body" cols="20" rows="5" class="form-control" ng-model="reviewCtrl.review.body"></textarea>
+						<textarea id="body" cols="20" rows="5" class="form-control" ng-model="reviewCtrl.review.body" required></textarea>
 						</div>
 						<div class="col-lg-12 form-group">
 						<label>by:</label>
-						<input type="email" class="form-control" ng-model="reviewCtrl.review.author">
+						<input type="email" class="form-control" ng-model="reviewCtrl.review.author" required>
 						</div>
 						<div class="col-lg-4 pull-right">
-						<input type="submit" value="Submit" class="form-control">
+						<div>review Form is {{reviewForm.$valid}}</div>
+						<div ng-if="!reviewCtrl.review.author" style="color:red;">The author need to be an email</div>
+						<input type="submit" value="Submit" class="form-control btn btn-primary btn-lg ng-pristine ng-invalid" ng-disabled="reviewForm.$invalid" >
 						</div>
 						</div>
 					</div>
@@ -104,12 +107,21 @@
 				</div>
 
 		<!--
+		CSS
+		. es un clase
+		# 
+		required campos obligatorios para llenar
+		novalidate si es valido o no lo que se almacena
+
 		id no se puede repetir
 		name si se puede repetir todas las veces necesarias
 		DIRECTIVAS
 		directiva para hacer que se vea o no el boton 
+		ng-if 
+		ng-disable deshabilitamos el boton cuando no estan llenos todos los campos
 		ng-show
 		ng-show es negado 
+		ng-pristine ng-invalid verifica los que se esta haciendo
 
 		ng-hide es para que no se muestre
 		ng-hide=! es negado
