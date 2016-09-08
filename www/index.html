@@ -30,81 +30,18 @@
 	<div class="product row" class="list-group"
 	ng-repeat="product in store.products"> <!-- scope of the controller -->
 		<div class="list-group-item" >
-			<h1>{{product.name}}</h1>
+		<product-title></product-title>
+		<!--><h3 product-title></h3></!-->
+			<!--<h1>{{product.name}}</h1>-->
 			<img class="center-block" ng-src="{{product.images[0].url}}" alt="">
-			<em class="pull-right"><h4>{{product.price | currency}}</h4></em>
+			<!--<em class="pull-right"><h4>{{product.price | currency}}</h4></em>-->
 			<!--<p>{{product.description}}</p>-->
 			<!--<button class="btn btn-danger">Add tu Cart</button>-->
-			<section ng-init="tab = 1" ng-controller="PanelController as panel">
-			<ul class="nav nav-pills" >
-				<li ng-class="{active: panel.isSelected(1)}">
-				<a href="" ng-click="panel.selectTab(1)">Description</a>
-				</li>
-					
-				<li ng-class="{active: panel.isSelected(2)}">
-				<a href="" ng-click="panel.selectTab(2)">Specifications</a>
-				</li>
-
-				<li ng-class="{active: panel.isSelected(3)}">
-				<a href="" ng-click="panel.selectTab(3)">Reviews</a>
-				</li>
-				</ul>
-
-				<div class="panel" ng-show="panel.isSelected(1)">
-					<h4>Description</h4>
-					<p>{{product.description}}</p>
+			<product-panels></product-panels>
+			
 				</div>
-
-				<div class="panel" ng-show="panel.isSelected(2)">
-					<h4>Specifications</h4>
-					<p>None yet</p>
-				</div>
-				
-				<div class="panel" ng-show="panel.isSelected(3)">
-					<h4>Reviews</h4>
-					<blockquote ng-repeat= "review in product.reviews">
-						<b>Stars: {{review.stars}}</b>
-						{{review.body}}
-						<br>
-						<cite>by: {{review.author}}</cite>
-					</blockquote>
-					<form name="reviewForm" ng-controller="ReviewsController as reviewCtrl" ng-submit="reviewForm.$valid && reviewCtrl.addReview(product)" novalidate> <!--Formulario para que el usuario pueda calificar el producto y darle las estrellas que el considera-->
-					<div class="row">
-					<blockquote> <!-- visualisamos los ng-model de cada input -->
-						<b>Stars: {{reviewCtrl.review.stars}}</b>
-						{{reviewCtrl.review.body}}
-						<cite>by: {{reviewCtrl.review.author}}</cite>
-					</blockquote>
-					<div class="col-lg-6 form-group">
-						<label for="rate">Rate this product:</label>
-						<select id="rate" class="form-control" ng-model="reviewCtrl.review.stars" required>
-						<option value="rate" selected="selected">Rate this product</option>
-						<option value="1">1 Star</option>
-						<option value="2">2 Stars</option>
-						<option value="2">3 Stars</option>
-						<option value="2">4 Stars</option>
-						<option value="2">5 Stars</option>
-					</select>
-						</div>
-						<div class="col-lg-6 form-group">
-						<textarea id="body" cols="20" rows="5" class="form-control" ng-model="reviewCtrl.review.body" required></textarea>
-						</div>
-						<div class="col-lg-12 form-group">
-						<label>by:</label>
-						<input type="email" class="form-control" ng-model="reviewCtrl.review.author" required>
-						</div>
-						<div class="col-lg-4 pull-right">
-						<div>review Form is {{reviewForm.$valid}}</div>
-						<div ng-if="!reviewCtrl.review.author" style="color:red;">The author need to be an email</div>
-						<input type="submit" value="Submit" class="form-control btn btn-primary btn-lg ng-pristine ng-invalid" ng-disabled="reviewForm.$invalid" >
-						</div>
-						</div>
-					</div>
-					</form>
-				</div>
-			</section>
-				</div>
-				</div>
+	</div>
+	</div>
 
 		<!--
 		CSS
@@ -116,6 +53,8 @@
 		id no se puede repetir
 		name si se puede repetir todas las veces necesarias
 		DIRECTIVAS
+		book-cover es donde se va a mostrar la portada de nuestro libro
+		product-title
 		directiva para hacer que se vea o no el boton 
 		ng-if 
 		ng-disable deshabilitamos el boton cuando no estan llenos todos los campos
