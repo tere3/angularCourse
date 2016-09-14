@@ -27,4 +27,21 @@
 			controllerAs: 'panel'
 		};
 	});
+
+	app.directive('reviewsSubmit', function(){ //creamos directiva
+		return{
+			restrict: 'E',
+			templateUrl: 'reviews-submit.html',
+			controller: function(){
+				this.review={};
+
+				this.addReview = function(product){
+					product.reviews.push(this.review); //esto se llena con la funcion de mi controlador
+					this.review ={};
+				}
+			},
+			controllerAs: 'reviewCtrl'
+		};
+	});
+
 })();

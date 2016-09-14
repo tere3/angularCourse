@@ -34,11 +34,18 @@
 		<!--><h3 product-title></h3></!-->
 			<!--<h1>{{product.name}}</h1>-->
 			<img class="center-block" ng-src="{{product.images[0].url}}" alt="">
+			<!--Mostrar todas las imagenes, ng-repeat y ng-src es para repetir todas las imagenes que tenemos y mando la url de cada una de ella y la class image-responsive hace responsable de que aparescan -->
+			<div class="row">
+				<div class="col-sm-6 col-md-3">
+					<a href="" class="thubnail">
+						<img ng-repeat="image in product.images" ng-src="{{image.url}}" class="image-responsive">
+					</a>
+				</div>
+			</div>
 			<!--<em class="pull-right"><h4>{{product.price | currency}}</h4></em>-->
 			<!--<p>{{product.description}}</p>-->
 			<!--<button class="btn btn-danger">Add tu Cart</button>-->
 			<product-panels></product-panels>
-			
 				</div>
 	</div>
 	</div>
