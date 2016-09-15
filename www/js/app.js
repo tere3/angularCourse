@@ -82,6 +82,15 @@
 			this.review ={};
 		}
 	});
+	//controlador para manejar las imagenes que se seleccionen
+	app.controller('GalleryController', function(){
+		
+		this.current = 0;
+
+		this.setCurrent = function(imageNumber){
+			this.current = imageNumber || 0;
+		};
+	});
 })();
 	
 

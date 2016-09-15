@@ -33,15 +33,27 @@
 		<product-title></product-title>
 		<!--><h3 product-title></h3></!-->
 			<!--<h1>{{product.name}}</h1>-->
-			<img class="center-block" ng-src="{{product.images[0].url}}" alt="">
+
+			<div ng-controller="GalleryController as gallery" ng-show="product.images.length"> <!-- para mostrar so hay imagenes -->
+				<div class="img-wrap center-block">
+					<img class="center-block" ng-src="{{product.images[gallery.current].url}}"/> <!--con la propiedad regresa el index de la propiedad que se esta seleccionando-->
+				</div>
+				<ul class="img-thumbnails clearfix"> <!--thumbnail sirve para hacer pequeñas galerias (muestra los cuadritos)-->
+					<li class="small-image pull-left thumbnail" ng-repeat="image in product.images"> <!-- muestra las imagenes en pequeño -->
+						<img ng-src="{{image.url}}" ng-click="gallery.setCurrent(image.id)" />
+					</li>
+				</ul>
+				<pre>{{image.id}}</pre> <!--se ve la imagen que se selecciono-->
+			</div>
+			<!--<img class="center-block" ng-src="{{product.images[0].url}}" alt="">-->
 			<!--Mostrar todas las imagenes, ng-repeat y ng-src es para repetir todas las imagenes que tenemos y mando la url de cada una de ella y la class image-responsive hace responsable de que aparescan -->
-			<div class="row">
+			<!--<div class="row">
 				<div class="col-sm-6 col-md-3">
 					<a href="" class="thubnail">
 						<img ng-repeat="image in product.images" ng-src="{{image.url}}" class="image-responsive">
 					</a>
 				</div>
-			</div>
+			</div>-->
 			<!--<em class="pull-right"><h4>{{product.price | currency}}</h4></em>-->
 			<!--<p>{{product.description}}</p>-->
 			<!--<button class="btn btn-danger">Add tu Cart</button>-->
